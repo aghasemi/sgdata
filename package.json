@@ -1,13 +1,16 @@
 {
-  "name": "chat-example",
-  "version": "0.0.0",
-  "description": "A chat example to showcase how to use `socket.io` with a static `express` server with `async` for control flow.",
+  "name": "sgdata",
+  "version": "0.0.1",
+  "description": "A wrapper around SwissGrid public bids' information.",
   "main": "server.js",
   "repository": "",
   "author": "Mostafa Eweda <mo.eweda@gmail.com>",
   "dependencies": {
     "async": "~0.2.8",
+    "babyparse": "^0.4.3",
     "express": "~3.2.4",
-    "socket.io": "~0.9.14"
+    "moment": "^2.11.1",
+    "request": "^2.67.0",
+    "sync-request": "^3.0.0"
   }
 }
