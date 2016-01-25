@@ -43,17 +43,19 @@ app.get('/:unit/:sign/:from/:to', function (req, res) {
 
   var fromDate=moment(from.toString(), "DD.MM.YYYY");
   var toDate=moment(to.toString(), "DD.MM.YYYY");
-  console.log(fromDate.toString()+' ** '+toDate.toString()+' # '+unitStr+' # '+signStr);
+  console.log(fromDate.format('DD.MM.YYYY')+' ** '+toDate.format('DD.MM.YYYY')+' # '+unitStr+' # '+signStr);
   if ((unitStr==='weekly')&& (fromDate.day()!=1 || toDate.day()!=0))
   {
      res.status(500).end('<h1>Invalid date range for weekly data</h1>')
      return;
   }
+  
   //res.send('Hello '+unit+sign+from+'-'+to+'&'+(grp==undefined));
-  var url=sgUrl.replace('{from}',fromDate.format('DD.MM.YYYY')).replace('{to}',fromDate.format('DD.MM.YYYY')).replace('{sign}',signStr).replace('{unit}',unitStr);
+  var url=sgUrl.replace('{from}',fromDate.format('DD.MM.YYYY')).replace('{to}',toDate.format('DD.MM.YYYY')).replace('{sign}',signStr).replace('{unit}',unitStr);
   var raw = sync_request('GET', url, {'headers': {}});
+  console.log(url);
   // pass in the contents of a csv file
-   var lines=raw.getBody().toString().split('\n');
+  var lines=raw.getBody().toString().split('\n');
    var data=Array();
    var respStr='';
    var filename='export.csv'
