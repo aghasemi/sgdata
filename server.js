@@ -57,7 +57,7 @@ app.get('/:unit/:sign/:from/:to', function (req, res) {
    var data=Array();
    var respStr='';
    var filename='export.csv'
-   res.set({'Content-Type': 'text/csv',"Content-Disposition": 'attachment;filename="'+filename+'"',
+   res.set({'Content-Type': 'text/csv',"Content-Disposition": 'filename="'+filename+'"',
    });
 
    lines.forEach(function(currLine, index, allLines) {
