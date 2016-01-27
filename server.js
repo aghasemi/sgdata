@@ -2,6 +2,7 @@
 var express = require('express');
 var sync_request = require('sync-request');
 var moment = require('moment');
+var numeral = require('numeral');
 
 
 
@@ -15,6 +16,7 @@ var validSigns=['p','positive','n','negative'];
 
 
 app.get('/:unit/:sign/:from/:to', function (req, res) {
+  
   var unit=req.params.unit;
   var sign=req.params.sign;
   var from=req.params.from;
@@ -68,16 +70,30 @@ app.get('/:unit/:sign/:from/:to', function (req, res) {
           currLine=currLine.replace("'","");
           record=currLine.split(';');
           record.pop();
-          //console.log(record.toString())
-          data.push(record);
-          respStr+=record.join(' , ')+'\n';
+          //console.log('@@ '+record.toString())
+          if (record.length>=3)
+          {
+            data.push(record);
+            var n=record.length;
+            record[n-1]=(Number(record[n-1]).toFixed(2)).lpad(' ',9);
+            record[n-2]=((record[n-2])).lpad(' ',6);
+            record[n-3]=((record[n-3])).lpad(' ',6);
+            var recordStr=record.join(' , ');
+            //console.log('## '+recordStr)
+            respStr+=recordStr+'\n';
+          }
         }
     });
   
     res.end(respStr);
   
 });
-
+String.prototype.lpad = function(padString, length) {
+    var str = this.toString();
+    while (str.length < length)
+        str = padString + str;
+    return str;
+}
 app.get('/', function (req, res) {
     res.end('Index page');
     next();

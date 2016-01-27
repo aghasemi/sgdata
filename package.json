@@ -10,6 +10,7 @@
     "babyparse": "^0.4.3",
     "express": "~3.2.4",
     "moment": "^2.11.1",
+    "numeral": "^1.5.3",
     "request": "^2.67.0",
     "sync-request": "^3.0.0"
   }
