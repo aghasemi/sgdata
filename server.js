@@ -80,7 +80,8 @@ app.get('/:unit/:sign/:from/:to', function (req, res) {
             record[n-3]=((record[n-3])).lpad(' ',6);
             var recordStr=record.join(' , ');
             //console.log('## '+recordStr)
-            respStr+=recordStr+'\n';
+            if (Number(record[n-2])>0)
+              respStr+=recordStr+'\n';
           }
         }
     });
